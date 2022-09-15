@@ -12,7 +12,7 @@ from pytube import YouTube
 con = sqlite3.connect("usersbot.db", check_same_thread=False)
 cur = con.cursor()
 
-token = '5530425179:AAGyJ8UbnKTb69wVxP9K-G0WvUgEj57EPes'
+token = 'Ваш токен'
 bot = telebot.TeleBot(token)
 @bot.message_handler(commands=['start'])
 def check_reg_users(message):
@@ -39,7 +39,7 @@ def reg_themes(message):
 
 @bot.message_handler(commands=['weather'])
 def get_weather(message):
-    open_weather_token = '3e0539b1ddcc40f82878756c3e166142'
+    open_weather_token = 'Ваш токен'
     city_id = cur.execute("SELECT city FROM users WHERE chatid=?", (message.chat.id,))
     city = [i for i in city_id.fetchone()]
 
@@ -76,12 +76,13 @@ def get_weather(message):
 
 @bot.message_handler(commands=['news'])
 def get_news(message):
+    token_news = 'Ваш токен'
     now = datetime.datetime.now()
     date = now.strftime('%Y-%m-%d')
     themes = [i.split(',') for i in cur.execute("SELECT themes FROM users WHERE chatid=?", (message.chat.id,)).fetchone()]
     for t in range(len(themes[0])):
         theme = themes[0][t]
-        url = requests.get(f'https://newsapi.org/v2/everything?q={theme}&from={date}&sortBy=popularity&apiKey=36f2f22d274d4919ae1550b9b6e15840').json()
+        url = requests.get(f'https://newsapi.org/v2/everything?q={theme}&from={date}&sortBy=popularity&apiKey={token}').json()
         status = url['status']
         if status == 'ok':
             for i in range(url['totalResults']):
