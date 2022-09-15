@@ -135,7 +135,7 @@ def get_audio(message):
 def dont_understand(message):
     if 'Погод'.lower() in message.text.lower():
         get_weather(message)
-    elif 'https://www.youtube.com/' in message.text:
+    elif 'https://www.youtube.com/' in message.text or 'https://youtu.be/' in message.text:
         get_audio(message)
     elif 'Привет'.lower() in message.text.lower():
         check_reg_users(message)
