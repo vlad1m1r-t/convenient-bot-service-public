@@ -82,7 +82,7 @@ def get_news(message):
     themes = [i.split(',') for i in cur.execute("SELECT themes FROM users WHERE chatid=?", (message.chat.id,)).fetchone()]
     for t in range(len(themes[0])):
         theme = themes[0][t]
-        url = requests.get(f'https://newsapi.org/v2/everything?q={theme}&from={date}&sortBy=popularity&apiKey={token}').json()
+        url = requests.get(f'https://newsapi.org/v2/everything?q={theme}&from={date}&sortBy=popularity&apiKey={token_news}').json()
         status = url['status']
         if status == 'ok':
             for i in range(url['totalResults']):
